@@ -1,0 +1,21 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: kw-policies
+spec:
+  repo: "https://github.com/manno/fleet-experiments"
+  branch: main
+  # Define each policy as an explicit bundle, referencing the shared options file.
+  bundles:
+    - base: policies/psp-policies/disallow-root-user
+      options: ../../options.yaml
+    # - base: policies/psp-policies/another-psp-policy
+    #   options: ../../options.yaml
+    # - base: policies/other-policies/some-other-policy
+    #   options: ../../options.yaml
+  # Enable drift correction
+  correctDrift:
+    enabled: true
+  targets:
+  - clusterSelector:
+      matchLabels: {}

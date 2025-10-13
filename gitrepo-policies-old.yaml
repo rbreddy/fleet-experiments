@@ -1,0 +1,17 @@
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: kubewarden-security-policies
+spec:
+  repo: "https://github.com/manno/fleet-experiments"
+  branch: main
+  paths:
+  # Fleet can monitor multiple directories for policies.
+  - policies-old/psp-policies
+  - policies-old/other-policies
+  # Enable drift correction
+  correctDrift:
+    enabled: true
+  targets:
+  - clusterSelector:
+      matchLabels: {}

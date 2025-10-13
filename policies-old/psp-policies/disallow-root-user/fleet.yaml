@@ -1,0 +1,5 @@
+defaultNamespace: kubewarden
+# This strategy deploys the policy to all target clusters simultaneously, prioritizing speed over a phased rollout.
+rolloutStrategy:
+  maxUnavailable: 100%
+  autoPartitionSize: 100%
