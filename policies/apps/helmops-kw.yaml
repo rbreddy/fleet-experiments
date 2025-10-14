@@ -1,0 +1,43 @@
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: HelmOp
+metadata:
+  name: helmop-kubewarden-crds
+spec:
+  defaultNamespace: kubewarden # This is the target namespace on the downstream clusters.
+  helm:
+    repo: https://charts.kubewarden.io
+    chart: kubewarden-crds
+  targets:
+  - clusterSelector:
+      matchLabels: {}
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: HelmOp
+metadata:
+  name: helmop-kubewarden-controller
+spec:
+  defaultNamespace: kubewarden # This is the target namespace on the downstream clusters.
+  dependsOn:
+  - name: "helmop-kubewarden-crds"
+  helm:
+    repo: https://charts.kubewarden.io
+    chart: kubewarden-controller
+  targets:
+  - clusterSelector:
+      matchLabels: {}
+---
+apiVersion: fleet.cattle.io/v1alpha1
+kind: HelmOp
+metadata:
+  name: helmop-kubewarden-defaults
+spec:
+  defaultNamespace: kubewarden # This is the target namespace on the downstream clusters.
+  dependsOn:
+  - name: "helmop-kubewarden-controller"
+  helm:
+    repo: https://charts.kubewarden.io
+    chart: kubewarden-defaults
+  targets:
+  - clusterSelector:
+      matchLabels: {}
