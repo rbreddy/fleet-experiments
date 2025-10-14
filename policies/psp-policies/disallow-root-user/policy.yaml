@@ -12,7 +12,7 @@ spec:
     operations:
     - CREATE
     - UPDATE
-  mutating: false
+  mutating: true
   settings:
     run_as_user:
       rule: MustRunAsNonRoot
