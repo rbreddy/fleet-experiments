@@ -1,0 +1,19 @@
+defaultNamespace: postgresql-ha
+
+helm:
+  repo: https://charts.bitnami.com/bitnami
+  chart: postgresql-ha
+  version: "16.3.2" # Verify latest
+  releaseName: pg-ha-main
+  values:
+    postgresql:
+      persistence:
+        enabled: true
+        size: "512Mi"
+    pgpool:
+      replicaCount: 2
+      persistence:
+        enabled: true
+        size: "256Mi"
+  waitForJobs: true
+  timeoutSeconds: 900

@@ -1,0 +1,43 @@
+defaultNamespace: monitoring
+
+helm:
+  repo: https://prometheus-community.github.io/helm-charts
+  chart: kube-prometheus-stack
+  version: "58.0.0" # Verify latest
+  releaseName: prometheus-stack-main
+  values:
+    alertmanager:
+      enabled: true
+      config:
+        global:
+          resolve_timeout: 5m
+        route:
+          group_by: ['job']
+          group_wait: 30s
+          group_interval: 5m
+          repeat_interval: 12h
+          receiver: 'null'
+        receivers:
+        - name: 'null'
+    grafana:
+      enabled: true
+      persistence:
+        enabled: true
+        type: pvc
+        storageClassName: "standard"
+        accessModes:
+          - ReadWriteOnce
+        size: "512Mi"
+    prometheus:
+      enabled: true
+      # prometheusSpec:
+      #   storageSpec:
+      #     volumeClaimTemplate:
+      #       spec:
+      #         storageClassName: "standard"
+      #         accessModes: ["ReadWriteOnce"]
+      #         resources:
+      #           requests:
+      #             storage: "512Mi"
+  waitForJobs: true
+  timeoutSeconds: 900

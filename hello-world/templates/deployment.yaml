@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: hello
+  name: nginx-helloworld
+  labels:
+    app: nginx-rancherhello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-rancherhello
+  template:
+    metadata:
+      labels:
+        app: nginx-rancherhello
+    spec:
+      containers:
+      - name: nginxhelloadasdassaa
+        image: nginx:latest
+        ports:
+        - containerPort: 80

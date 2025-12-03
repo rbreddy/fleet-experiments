@@ -1,0 +1,12 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: ClusterOutput
+metadata:
+name: opensearch-fluentd
+namespace: cattle-logging-system
+fields:
+- opensearch-fluentd
+- true
+- null
+spec:
+  file:
+    path: ' /tmp/${tag}'

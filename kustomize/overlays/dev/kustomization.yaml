@@ -1,0 +1,9 @@
+resources:
+- ../../base
+
+patches:
+- path: redis-master.patch.yaml
+  target:
+    kind: Deployment
+    name: redis-master
+

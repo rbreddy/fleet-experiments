@@ -1,0 +1,19 @@
+defaultNamespace: sonarqube
+
+helm:
+  repo: https://charts.bitnami.com/bitnami
+  chart: sonarqube
+  version: "8.1.17" # Verify latest
+  releaseName: sonarqube-main
+  values:
+    # sonarqubePassword: "yoursonarpassword"
+    persistence:
+      enabled: true
+      size: "512Mi"
+    # For production, use an external PostgreSQL or the bundled one:
+    postgresql:
+      enabled: true
+      persistence:
+        size: "512Mi"
+  waitForJobs: true
+  timeoutSeconds: 800

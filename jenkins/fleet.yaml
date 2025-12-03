@@ -1,0 +1,20 @@
+defaultNamespace: jenkins
+
+helm:
+  repo: https://charts.bitnami.com/bitnami
+  chart: jenkins
+  version: "12.4.1" # Verify latest
+  releaseName: jenkins-main
+  values:
+    # controller:
+    #   admin:
+    #     user: "admin"
+    #     password: "yourjenkinspassword"
+    controller: # Renamed from 'master' in newer chart versions
+      persistence:
+        enabled: true
+        size: "512Mi"
+    # agent: # Formerly 'agent'
+    #   enabled: false # Disable default Kubernetes agent if not needed for simple setup
+  waitForJobs: true
+  timeoutSeconds: 700
