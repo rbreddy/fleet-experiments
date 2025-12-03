@@ -10,4 +10,4 @@ targetCustomizations:
       matchLabels:
         env: prod
     helm:
-      chart: wther-chart
+      chart: other-chart
