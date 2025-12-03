@@ -1,3 +1,0 @@
-[submodule "fleet-test-data"]
-	path = fleet-test-data
-	url = https://github.com/rancher/fleet-test-data
