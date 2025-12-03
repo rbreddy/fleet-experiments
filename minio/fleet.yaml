@@ -1,0 +1,19 @@
+defaultNamespace: minio
+
+helm:
+  repo: https://charts.bitnami.com/bitnami
+  chart: minio
+  version: "14.6.6" # Verify latest
+  releaseName: minio-main
+  values:
+    # auth:
+    #   rootUser: "minioadmin"
+    #   rootPassword: "miniostoragepassword"
+    mode: standalone # or "distributed"
+    persistence:
+      enabled: true
+      size: "512Mi" # For standalone. Distributed mode has different persistence needs.
+    # For distributed mode, you would specify replicaCount (must be 4 to 16)
+    # replicaCount: 4
+  waitForJobs: true
+  timeoutSeconds: 600

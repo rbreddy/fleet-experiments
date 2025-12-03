@@ -1,0 +1,17 @@
+defaultNamespace: mongodb
+
+helm:
+  repo: https://charts.bitnami.com/bitnami
+  chart: mongodb
+  version: "18.1.10" # Verify latest
+  releaseName: mongodb-main
+  values:
+    # architecture: "replicaset" # or "standalone"
+    # auth:
+    #   rootUser: "admin"
+    #   rootPassword: "yourmongopassword"
+    persistence:
+      enabled: true
+      size: "512Mi"
+  waitForJobs: true
+  timeoutSeconds: 800

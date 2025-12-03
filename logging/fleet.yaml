@@ -1,0 +1,26 @@
+defaultNamespace: cattle-logging-system
+helm:
+  chart: rancher-logging
+  repo: https://charts.rancher.io
+  releaseName: rancher-logging
+  version: 105.2.1+up4.10.0
+  #values: 
+  #  engine: global.fleet.clusterLabels.clustertype
+
+targetCustomizations:
+- name: molmedo
+  kustomize:
+    dir: overlay
+  clusterSelector:
+    matchLabels:
+      management.cattle.io/cluster-display-name: ekscluster
+diff:
+  comparePatches:
+  - apiVersion: logging.banzaicloud.io/v1beta1
+    kind: Logging
+    name: rancher-logging
+    operations:
+    - {"op": "add", "path": "/spec/fluentbit", "value": '{resources":{"requests":{"cpu":"100m"}}}'}
+    - {"op": "add", "path": "/spec/fluentd", "value": '{resources":{"requests":{"cpu":"100m"}}}'}
+dependsOn:
+  - name: logging-logging-crd

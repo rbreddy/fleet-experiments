@@ -1,0 +1,16 @@
+defaultNamespace: keycloak
+
+helm:
+  repo: https://charts.bitnami.com/bitnami
+  chart: keycloak
+  version: "19.3.3" # Verify latest
+  releaseName: keycloak-main
+  values:
+    postgresql:
+      enabled: true
+      primary:
+        persistence:
+          enabled: true
+          size: "512Mi"
+  waitForJobs: true
+  timeoutSeconds: 800
